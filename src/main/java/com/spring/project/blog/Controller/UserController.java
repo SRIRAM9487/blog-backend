@@ -37,16 +37,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/{id}/comments/show")
-    public ResponseEntity<?> showCommentsByUser(@PathVariable("id") Long id) {
-        try {
-            return new ResponseEntity<>(service.showCommentByUser(id), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
-        }
-    }
-
     @GetMapping("/user/{id}/post/comment/show")
+
     public ResponseEntity<?> showPostByUser(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(service.showPostByUser(id), HttpStatus.OK);

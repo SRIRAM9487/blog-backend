@@ -1,6 +1,5 @@
 package com.spring.project.blog.Model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,11 +23,11 @@ public class CommentModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "content",nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
     @CreationTimestamp
-    @Column(name = "createdAt",nullable = false)
+    @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -36,10 +35,10 @@ public class CommentModel {
     private PostModel post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserModel user;
 
-    @OneToMany(mappedBy = "parentComment",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)
     private List<CommentModel> replies;
 
     @ManyToOne
