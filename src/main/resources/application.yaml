@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: blog
+  datasource:
+    url: jdbc:mysql://localhost:8500/Spring2
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
