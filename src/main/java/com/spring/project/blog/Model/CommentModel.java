@@ -1,5 +1,6 @@
 package com.spring.project.blog.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,10 +31,12 @@ public class CommentModel {
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostModel post;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel user;
@@ -42,6 +45,7 @@ public class CommentModel {
     private List<CommentModel> replies;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "parentComment_id")
     private CommentModel parentComment;
 }

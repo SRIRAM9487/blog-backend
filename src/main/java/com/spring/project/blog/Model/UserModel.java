@@ -28,7 +28,7 @@ public class UserModel {
     @Column(name = "content", nullable = false)
     private String content = "about yourself";
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false,unique = true)
     private String email;
 
 

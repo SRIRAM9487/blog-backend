@@ -24,7 +24,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(service.showAllUser(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -33,17 +33,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(service.showUserById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
-        }
-    }
-
-    @GetMapping("/user/{id}/post/comment/show")
-
-    public ResponseEntity<?> showPostByUser(@PathVariable("id") Long id) {
-        try {
-            return new ResponseEntity<>(service.showPostByUser(id), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>( e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -53,7 +43,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(service.addUser(user), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -63,7 +53,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(service.updateUser(id, user), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -73,7 +63,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 }

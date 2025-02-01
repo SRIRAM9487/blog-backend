@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/comment")
 public class PostController {
 
     @Autowired
@@ -23,7 +22,7 @@ public class PostController {
         try {
             return new ResponseEntity<>(service.showAllPost(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -32,7 +31,7 @@ public class PostController {
         try {
             return new ResponseEntity<>(service.showPostByUserId(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -41,16 +40,16 @@ public class PostController {
         try {
             return new ResponseEntity<>(service.addPostByUserId(id, content), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
-    @PutMapping("/user/{id}/post/update")
-    public ResponseEntity<?> updatePostByUserId(@PathVariable("id") Long UserId, @RequestParam Long postId, @RequestParam String content) {
+    @PutMapping("/post/{id}/update")
+    public ResponseEntity<?> updatePostByUserId(@PathVariable("id") Long postId, @RequestParam String content) {
         try {
-            return new ResponseEntity<>(service.updatePostByUserId(UserId, postId, content), HttpStatus.OK);
+            return new ResponseEntity<>(service.updatePostByUserId(postId, content), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -60,7 +59,7 @@ public class PostController {
         try {
             return new ResponseEntity<>(service.deletePostByUserId(UserId, postId), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 

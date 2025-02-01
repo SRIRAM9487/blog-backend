@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -46,60 +48,69 @@ public class UserService {
         }
     }
 
-    public Object showAllUser() {
+    public List<UserModel> showAllUser() {
         try {
-            LOG.info("The user data is beign fetched");
+            LOG.info("The user data is being fetched");
             return userrepo.findAll();
         } catch (Exception e) {
-            LOG.error("ERROR : ", e.getMessage());
+            LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error while fetching the user data ");
         }
     }
 
-    public Object showUserById(Long id) {
+    public UserModel showUserById(Long id) {
         try {
             idCheker(id);
-            return userrepo.findById(id).orElseThrow(() -> {
-                LOG.error("User not found");
+            UserModel user = userrepo.findById(id).orElseThrow(() -> {
+                LOG.error("user not found");
                 throw new IllegalArgumentException("User not found");
             });
+            LOG.info("The user with " + id + " has been fetched successfully");
+            return user;
         } catch (Exception e) {
-            LOG.error("ERROR : ", e.getMessage());
+            LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error : " + e.getMessage());
         }
     }
 
 
-    public Object addUser(UserModel user) {
+    public UserModel addUser(UserModel user) {
         try {
             checker(user.getName(), user.getEmail());
+            UserModel new_user = userrepo.save(user);
             LOG.info("User added successfully");
-            return userrepo.save(user);
+            return new_user;
         } catch (Exception e) {
-            LOG.error("ERROR : ", e.getMessage());
+            LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error : " + e.getMessage());
         }
     }
 
     @Transactional
-    public Object updateUser(Long id, UserModel user) {
+    public UserModel updateUser(Long id, UserModel user) {
         try {
             idCheker(id);
             checker(user.getName(), user.getEmail());
-            if (
-                    userrepo.existsByEmail(user.getEmail())
-                            && userrepo.findByEmail(user.getEmail()).getId().equals(user.getId())){
+
+            UserModel updated_user = userrepo.findById(id).orElseThrow(() -> {
+                LOG.error("user not found");
+                throw new IllegalArgumentException("User not found");
+            });
+            UserModel existing_user = userrepo.findByEmail(user.getEmail());
+            if (existing_user != null && !existing_user.getId().equals(id)) {
                 throw new IllegalArgumentException("The email already exists");
             }
-            return userrepo.save(user);
+            updated_user.setName(user.getName());
+            updated_user.setEmail(user.getEmail());
+            updated_user.setContent(user.getContent());
+            return userrepo.save(updated_user);
         } catch (Exception e) {
-            LOG.error("ERROR : ", e.getMessage());
+            LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error : " + e.getMessage());
         }
     }
 
-    public Object deleteUser(Long id) {
-
+    public UserModel deleteUser(Long id) {
         try {
             idCheker(id);
             UserModel user = userrepo.findById(id).orElseThrow(() -> {
@@ -107,10 +118,12 @@ public class UserService {
                 throw new IllegalArgumentException("User not found");
             });
             userrepo.delete(user);
+            LOG.info("user " + id + " deleted successfully");
             return user;
         } catch (Exception e) {
-            LOG.error("ERROR : ", e.getMessage());
+            LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error : " + e.getMessage());
         }
     }
+
 }

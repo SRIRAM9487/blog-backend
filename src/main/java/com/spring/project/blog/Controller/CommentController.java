@@ -22,7 +22,7 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.showAllComments(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -31,25 +31,25 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.showCommentById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
-    @GetMapping("/parentcomment/{id}/replies/{id}/show")
+    @GetMapping("/parentcomment/{id}/replies/show")
     public ResponseEntity<?> showRepliesById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(service.showRepliesById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
-    @GetMapping("/post/{id}/replies/{id}/show")
+    @GetMapping("/post/{id}/replies/show")
     public ResponseEntity<?> showrepliesByPost(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(service.showRepliesByPost(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -58,16 +58,16 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.showCommentsByUserId(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
-    @PostMapping("/user/post/comment/add")
+    @PostMapping("/user/{id}/post/comment/add")
     public ResponseEntity<?> addCommentByPost(@PathVariable("id") Long user_id, @RequestParam Long post_id, @RequestParam String content) {
         try {
-            return new ResponseEntity<>(service.addCommentByPost(user_id,post_id,content), HttpStatus.OK);
+            return new ResponseEntity<>(service.addCommentByPost(user_id, post_id, content), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -76,7 +76,7 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.addCommentByParentComment(user_id, parent_id, content), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -85,7 +85,7 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.updateComment(id, content), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -94,16 +94,16 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.deleteCommentById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
     @DeleteMapping("/parent/{id}/comment/delete")
-    public ResponseEntity<?> deleteCommentOfParentComentById(@PathVariable("id") Long parentComment_id, @RequestParam Long comment_id) {
+    public ResponseEntity<?> deleteCommentOfParentComentById(@PathVariable("id") Long parentComment_id) {
         try {
-            return new ResponseEntity<>(service.deleteCommentOfParentById(parentComment_id, comment_id), HttpStatus.OK);
+            return new ResponseEntity<>(service.deleteCommentOfParentById(parentComment_id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -112,16 +112,16 @@ public class CommentController {
         try {
             return new ResponseEntity<>(service.deleteCommentByPost(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
-    @DeleteMapping("/comment/{id}/comment/delete")
-    public ResponseEntity<?> deleteCommentByCustomerId(@PathVariable("id") Long id) {
+    @DeleteMapping("/user/{id}/comment/delete")
+    public ResponseEntity<?> deleteCommentByUserId(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<>(service.deleteCommentByCustomerId(id), HttpStatus.OK);
+            return new ResponseEntity<>(service.deleteCommentByUserId(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("ERROR : " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 }
