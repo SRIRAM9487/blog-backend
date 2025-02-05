@@ -1,6 +1,8 @@
-package com.spring.project.blog.Model;
+package com.spring.project.blog.Comment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.project.blog.Post.PostModel;
+import com.spring.project.blog.User.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

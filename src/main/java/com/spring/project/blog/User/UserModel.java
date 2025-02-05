@@ -1,5 +1,7 @@
-package com.spring.project.blog.Model;
+package com.spring.project.blog.User;
 
+import com.spring.project.blog.Comment.CommentModel;
+import com.spring.project.blog.Post.PostModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

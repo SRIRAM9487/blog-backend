@@ -1,9 +1,7 @@
-package com.spring.project.blog.Service;
+package com.spring.project.blog.User;
 
-import com.spring.project.blog.Model.UserModel;
-import com.spring.project.blog.Repository.CommentRepository;
-import com.spring.project.blog.Repository.PostRepository;
-import com.spring.project.blog.Repository.UserRepository;
+import com.spring.project.blog.Comment.CommentRepository;
+import com.spring.project.blog.Post.PostRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

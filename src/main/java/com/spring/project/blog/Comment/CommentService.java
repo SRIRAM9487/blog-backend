@@ -1,11 +1,9 @@
-package com.spring.project.blog.Service;
+package com.spring.project.blog.Comment;
 
-import com.spring.project.blog.Model.CommentModel;
-import com.spring.project.blog.Model.PostModel;
-import com.spring.project.blog.Model.UserModel;
-import com.spring.project.blog.Repository.CommentRepository;
-import com.spring.project.blog.Repository.PostRepository;
-import com.spring.project.blog.Repository.UserRepository;
+import com.spring.project.blog.Post.PostModel;
+import com.spring.project.blog.Post.PostRepository;
+import com.spring.project.blog.User.UserModel;
+import com.spring.project.blog.User.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

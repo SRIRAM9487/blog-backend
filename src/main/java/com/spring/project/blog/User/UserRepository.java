@@ -1,6 +1,5 @@
-package com.spring.project.blog.Repository;
+package com.spring.project.blog.User;
 
-import com.spring.project.blog.Model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

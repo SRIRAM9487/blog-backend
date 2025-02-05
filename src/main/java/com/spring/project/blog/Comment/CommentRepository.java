@@ -1,8 +1,7 @@
-package com.spring.project.blog.Repository;
+package com.spring.project.blog.Comment;
 
-import com.spring.project.blog.Model.CommentModel;
-import com.spring.project.blog.Model.PostModel;
-import com.spring.project.blog.Model.UserModel;
+import com.spring.project.blog.Post.PostModel;
+import com.spring.project.blog.User.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
