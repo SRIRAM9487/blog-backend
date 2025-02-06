@@ -27,6 +27,12 @@ public class UserModel {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "password",nullable = false)
+    private String password;
+
+    @Column(name = "Usernamer",nullable = false,unique = true)
+    private String username;
+
     @Column(name = "content", nullable = false)
     private String content = "about yourself";
 

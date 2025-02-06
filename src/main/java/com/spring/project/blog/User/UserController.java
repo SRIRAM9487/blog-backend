@@ -36,7 +36,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/user/add")
+    @PostMapping("/register")
     public ResponseEntity<?> addUser(@RequestBody UserModel user) {
         try {
             return new ResponseEntity<>(service.addUser(user), HttpStatus.OK);

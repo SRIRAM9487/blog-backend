@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserService {
 
     private final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     @Autowired
     private UserRepository userrepo;
@@ -75,6 +77,7 @@ public class UserService {
     public UserModel addUser(UserModel user) {
         try {
             checker(user.getName(), user.getEmail());
+            user.setPassword(encoder.encode(user.getPassword()));
             UserModel new_user = userrepo.save(user);
             LOG.info("User added successfully");
             return new_user;
