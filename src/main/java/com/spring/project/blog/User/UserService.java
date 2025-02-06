@@ -103,7 +103,7 @@ public class UserService {
     public String login(UserModel user){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
         if(authentication.isAuthenticated()){
-            return "SUCCESS";
+            return jwtService.generateToken(user.getUsername());
         }
         return "Failed";
     }
