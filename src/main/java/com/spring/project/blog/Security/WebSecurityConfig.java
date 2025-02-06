@@ -20,11 +20,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private JwtFilter jwtFilter;
+   private JwtFilter jwtFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         String[] permittedUrls ={"/","/register","/login","/logout","/user","/post","/comment"};
