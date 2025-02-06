@@ -2,10 +2,14 @@ package com.spring.project.blog.User;
 
 import com.spring.project.blog.Comment.CommentRepository;
 import com.spring.project.blog.Post.PostRepository;
+import com.spring.project.blog.Security.JwtService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,7 @@ import java.util.List;
 @Service
 public class UserService {
 
+    //------------------------------------------------------------DEPENDENCIES------------------------------------------------------------
     private final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -26,6 +31,13 @@ public class UserService {
 
     @Autowired
     private CommentRepository commentrepo;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    //------------------------------------------------------------CHECKER------------------------------------------------------------
 
     public void idCheker(Long id) {
         if (id == null) {
@@ -48,6 +60,7 @@ public class UserService {
         }
     }
 
+    //------------------------------------------------------------METHODS------------------------------------------------------------
     public List<UserModel> showAllUser() {
         try {
             LOG.info("The user data is being fetched");
@@ -74,7 +87,7 @@ public class UserService {
     }
 
 
-    public UserModel addUser(UserModel user) {
+    public UserModel register(UserModel user) {
         try {
             checker(user.getName(), user.getEmail());
             user.setPassword(encoder.encode(user.getPassword()));
@@ -85,6 +98,14 @@ public class UserService {
             LOG.error("ERROR : {}", e.getMessage());
             throw new RuntimeException("Error : " + e.getMessage());
         }
+    }
+
+    public String login(UserModel user){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+        if(authentication.isAuthenticated()){
+            return "SUCCESS";
+        }
+        return "Failed";
     }
 
     @Transactional

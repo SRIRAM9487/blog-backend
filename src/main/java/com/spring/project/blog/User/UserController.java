@@ -37,14 +37,23 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> addUser(@RequestBody UserModel user) {
+    public ResponseEntity<?> register(@RequestBody UserModel user) {
         try {
-            return new ResponseEntity<>(service.addUser(user), HttpStatus.OK);
+            return new ResponseEntity<>(service.register(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserModel user) {
+        try {
+            return new ResponseEntity<>(service.login(user), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
+        }
+    }
 
     @PutMapping("/user/{id}/update")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserModel user) {
