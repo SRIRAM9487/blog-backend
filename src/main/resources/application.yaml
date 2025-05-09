@@ -2,22 +2,14 @@ spring:
   application:
     name: blog
   datasource:
-    url: jdbc:mysql://localhost:8500/test
+    url: jdbc:mysql://localhost:9004/blog
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-  security:
-    user:
-      name: user
-      password: user
-management:
-  tracing:
-    sampling:
-      probability: 1.0

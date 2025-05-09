@@ -7,17 +7,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService service;
 
-    @GetMapping("/user/")
+    @GetMapping("/")
     public String greet() {
         return "Hello from the user";
     }
 
-    @GetMapping("/user/all/show")
+    @GetMapping("/all/show")
     public ResponseEntity<?> showAllUser() {
         try {
             return new ResponseEntity<>(service.showAllUser(), HttpStatus.OK);
@@ -26,7 +27,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/{id}/show")
+    @GetMapping("/{id}/show")
     public ResponseEntity<?> showUserById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(service.showUserById(id), HttpStatus.OK);
@@ -55,7 +56,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/user/{id}/update")
+    @PutMapping("/{id}/update")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserModel user) {
         try {
             return new ResponseEntity<>(service.updateUser(id, user), HttpStatus.OK);
@@ -65,7 +66,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/user/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
