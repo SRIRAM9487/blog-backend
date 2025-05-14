@@ -12,9 +12,9 @@ This is a minimal backend for a blog application built for learning or prototypi
 
 ## Tech Stack
 
-- Backend Framework: [Your framework here, e.g., Express, Spring Boot, Django]
-- Database: [Your DB here, e.g., MongoDB, MySQL, PostgreSQL]
-- Language: [e.g., JavaScript, Java, Python]
+- Backend Framework: [ Spring Boot]
+- Database: [MySQL]
+- Language: [Java]
 
 ## Getting Started
 
@@ -22,8 +22,8 @@ This is a minimal backend for a blog application built for learning or prototypi
 
 Make sure you have the following installed:
 
-- [Language Runtime] (e.g., Node.js, Java, Python)
-- [Database] (e.g., MongoDB running locally or in the cloud)
+- [Language Runtime] ( Java)
+- [Database] (MYSQL)
 
 ### Installation
 
